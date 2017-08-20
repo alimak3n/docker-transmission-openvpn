@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/bash
 
 # Source our persisted env variables from container startup
 . /etc/transmission/environment-variables.sh
@@ -67,7 +67,7 @@ auth_enabled=$(grep 'rpc-authentication-required\"' $transmission_settings_file 
 if [ "true" = "$auth_enabled" ]
   then
   echo "transmission auth required"
-  myauth="--auth $transmission_username:$transmission_passwd"
+  myauth="http://localhost:${TRANSMISSION_RPC_PORT}/${TRANSMISSION_RPC_URL//\//} --auth $transmission_username:$transmission_passwd"
 else
     echo "transmission auth not required"
     myauth=""
